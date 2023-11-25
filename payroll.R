@@ -78,8 +78,10 @@ generate_weekly_payroll <- function() {
   total_weekly_salary <- 0
   hourly_rate <- calculate_hourly_rate(daily_rate, max_regular_hours_per_day)
 
+  employee_name <- readline("\nEnter employee name: ")
+
   for (day in 1:7) {
-    prompt_in <- paste("\nEnter IN time for day", day, "(in military time format): ", sep=" ")
+    prompt_in <- paste("Enter IN time for day", day, "(in military time format): ", sep=" ")
     in_time <- as.numeric(readline(prompt_in))
 
     prompt_out <- paste("Enter OUT time for day", day, "(in military time format): ", sep=" ")
@@ -92,14 +94,14 @@ generate_weekly_payroll <- function() {
     day_salary <- result$day_salary
     overtime_hours <- result$overtime_hours
 
+    cat("\nEmployee Name:", employee_name, "\n")
     cat("Overtime hours (Night Shift Overtime):", overtime_hours, "(", ifelse(is_night_shift(out_time), "0", overtime_hours), ")\n")
     cat("Salary for day", day, ":", day_salary, "\n")
-    
 
     total_weekly_salary <- total_weekly_salary + day_salary
   }
 
-  cat("\nTotal weekly salary:", total_weekly_salary, "\n")
+  cat("\nTotal weekly salary for", employee_name, ":", total_weekly_salary, "\n")
 }
 
 # Modify default configuration
